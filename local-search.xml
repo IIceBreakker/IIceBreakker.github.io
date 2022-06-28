@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>MySQL8开启主从复制以及MyCat配置读写分离（2）</title>
+    <link href="/2022/06/28/MySQL%E5%BC%80%E5%90%AF%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%BB%A5%E5%8F%8AMyCat%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%882%EF%BC%89/"/>
+    <url>/2022/06/28/MySQL%E5%BC%80%E5%90%AF%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%BB%A5%E5%8F%8AMyCat%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%882%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>MySQL8开启主从复制以及MyCat配置读写分离（1）</title>
+    <link href="/2022/06/28/MySQL%E5%BC%80%E5%90%AF%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%BB%A5%E5%8F%8AMyCat%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%881%EF%BC%89/"/>
+    <url>/2022/06/28/MySQL%E5%BC%80%E5%90%AF%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%BB%A5%E5%8F%8AMyCat%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%881%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>  生产项目中有个数据表A，表A存放着用户上报来的数据，审核人员审核数据最终也是直接修改A中单条数据的状态，而且还有另外一个系统每隔15分钟就要发起一次HTTP请求拉取该表的数据显示，该请求是根据上一次拉取时间到当前时间作为WHERE条件查询，性能也不好。这样表A每时每刻的偏高并发量导致一些报表查询速度和操作很慢，对了，报表查询本身也是个很费时的操作。所以考虑再三，而且为了锻炼自己的水平，决定采用MySQL集群，使用MyCat2（以下简称MyCat）配置读写分离。</p><h5 id="配置MySQL服务器的主从复制"><a href="#配置MySQL服务器的主从复制" class="headerlink" title="配置MySQL服务器的主从复制"></a>配置MySQL服务器的主从复制</h5><p>  为了配合后期的MyCat，我们在两台服务器上新建两个用户来给MyCat客户端使用，登录两台服务器，执行以下命令。</p><pre><code class="hljs MySQL">-- 新建用户CREATE USER &#x27;mycat&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;你的密码&#x27;;-- 授权远程登录权限 %代表允许所有主机登录GRANT ALL PRIVILEGES ON *.* TO &#x27;mycat&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;你的密码&#x27; WITH GRANT OPTION;FLUSH PRIVILEGES;USE MYSQL;SELECT * FROM USER;</code></pre><p>核心配置为这俩文件，我这是在同一台电脑上配置的</p><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220628200726.png"></p><p>首先是主节点的</p><pre><code class="hljs ini"><span class="hljs-comment"># ***** 重要配置 主从节点设置不同的ID *****</span><span class="hljs-attr">server-id</span>=<span class="hljs-number">1</span><span class="hljs-comment"># 开启日志</span><span class="hljs-attr">log-bin</span>=<span class="hljs-string">&quot;TEST-Master-bin&quot;</span><span class="hljs-comment"># 要同步的数据库</span><span class="hljs-attr">binlog-do-db</span>=TESTDB<span class="hljs-comment">#当sync_binlog = N (N&gt;0) ，MySQL 在每写 N次 二进制日志binary log时，会使用fdatasync()函数将它的写二进制日志binary log同步到磁盘中去。sync_binlog 的默认值是0，像操作系统刷其他文件的机制一样，MySQL不会同步到磁盘中去而是依赖操作系统来刷新binary log。</span><span class="hljs-attr">sync_binlog</span>=<span class="hljs-number">1</span><span class="hljs-comment"># 要忽略的数据库</span><span class="hljs-attr">binlog-ignore-db</span>=mysql<span class="hljs-attr">binlog-ignore-db</span>=performance_schema<span class="hljs-attr">binlog-ignore-db</span>=information_schema<span class="hljs-attr">binlog-ignore-db</span> = sys<span class="hljs-comment"># 三个配置STATEMENT, ROW, MIXED，我们这里选用ROW</span><span class="hljs-attr">binlog_format</span>=ROW</code></pre><p>然后是从节点的</p><pre><code class="hljs ini"><span class="hljs-comment"># ***** 重要配置 主从节点设置不同的ID *****</span><span class="hljs-attr">server-id</span>=<span class="hljs-number">2</span><span class="hljs-comment"># 日志开启</span><span class="hljs-attr">log_bin</span>=TEST-Slave-bin<span class="hljs-comment"># 要同步的数据库</span><span class="hljs-attr">replicate_wild_do_table</span>=TESTDB.%<span class="hljs-comment"># 忽略数据库</span><span class="hljs-attr">replicate_wild_ignore_table</span>=mysql.%<span class="hljs-attr">replicate_wild_ignore_table</span>=performance_schema.%<span class="hljs-attr">replicate_wild_ignore_table</span>=information_schema.%<span class="hljs-comment"># 三个配置STATEMENT, ROW, MIXED</span><span class="hljs-attr">binlog_format</span>=ROW</code></pre><p>在主节点执行以下命令</p><pre><code class="hljs crmsh">SHOW <span class="hljs-keyword">MASTER</span> <span class="hljs-title">STATUS</span>;</code></pre><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220628202552.png"></p><p>这里的File列就是我们上面配置的log-bin，BinLog_Do_DB和Bin_Ignore_DB都对应上面的配置，这里核心是File和Position</p><p>接下来启动从库并执行</p><pre><code class="hljs MySQL">change master to master_host=&#x27;主库IP&#x27;, -- 主库ip地址master_port=3306,master_user=&#x27;root&#x27;, -- 可以在主库上新建一个专门用来主从复制的账号并赋予权限master_password=&#x27;密码&#x27;, -- 密码master_log_file=&#x27;DESKTP-H9RHL3K-bin.000005&#x27;, --主库File文件名，就是上面主库查询的File列master_log_pos=34948678; --主库pos值，上面查询的Position列</code></pre><p>最后在从库上执行</p><pre><code class="hljs crmsh"><span class="hljs-literal">START</span> <span class="hljs-literal">SLAVE</span>;SHOW <span class="hljs-literal">SLAVE</span> STATUS;</code></pre><p>下面两个值为Yes，即为已经成功</p><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220628204724.png"></p><p>现在在主库上执行DML语句，在从库上应该都会反映出来。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>MySQL 集群</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>华为经典面试题--双线程打印</title>
+    <link href="/2022/05/30/200-05-30-%E5%8D%8E%E4%B8%BA%E7%BB%8F%E5%85%B8%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%8C%E7%BA%BF%E7%A8%8B%E6%89%93%E5%8D%B0/"/>
+    <url>/2022/05/30/200-05-30-%E5%8D%8E%E4%B8%BA%E7%BB%8F%E5%85%B8%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%8C%E7%BA%BF%E7%A8%8B%E6%89%93%E5%8D%B0/</url>
+    
+    <content type="html"><![CDATA[<h3 id="本题解法用来自我学习Java的一些多线程操作"><a href="#本题解法用来自我学习Java的一些多线程操作" class="headerlink" title="本题解法用来自我学习Java的一些多线程操作"></a>本题解法用来自我学习Java的一些多线程操作</h3><p><code>一个字母数组，一个数字数组，需要交叉打印两个数组得到值</code></p><h4 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h4>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Java基本知识</title>
+    <link href="/2022/05/27/Java%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/"/>
+    <url>/2022/05/27/Java%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</url>
+    
+    <content type="html"><![CDATA[<h2 id="对象在内存中的定位布局"><a href="#对象在内存中的定位布局" class="headerlink" title="对象在内存中的定位布局"></a>对象在内存中的定位布局</h2><p>一个对象的内存大小由四部分组成：</p><ul><li><font color="green">Markword</font>–64位虚拟机8个字节，32位虚拟机4个字节。其中包含锁，hashcode，GC信息</li><li><font color="green">class pointer</font>–4个字节，保存class信息</li><li><font color="green">instance data</font>–实例数据，引用类型地址为4个字节</li><li><font color="green">padding</font>–补充字节使得总字节数能被8整除</li></ul><p>对象创建过程三步：</p><ol><li>申请空间 new T</li><li>调构造方法设初始值 T.&lt;init&gt;</li><li>建立关联</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Java基础</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>关于Shiro和Spring Security</title>
+    <link href="/2022/05/26/%E5%85%B3%E4%BA%8EShiro%E5%92%8CSpring-Security/"/>
+    <url>/2022/05/26/%E5%85%B3%E4%BA%8EShiro%E5%92%8CSpring-Security/</url>
+    
+    <content type="html"><![CDATA[<h3 id="Shiro认证的关键对象"><a href="#Shiro认证的关键对象" class="headerlink" title="Shiro认证的关键对象"></a>Shiro认证的关键对象</h3><ul><li><font color="green">Subject</font> 访问系统的用户</li><li><font color="green">Principal</font> 身份信息，是<strong>Subject</strong>进行身份认证的标识，必须具有唯一性，如用户名，一个<strong>Subject</strong>可以有多个<strong>Principal</strong>，但是必须有一个<strong>Primary Principal</strong></li><li><font color="green">Credential</font> 凭证信息，主要是密码</li></ul><span id="more"></span><h3 id="Shiro授权的关键对象"><a href="#Shiro授权的关键对象" class="headerlink" title="Shiro授权的关键对象"></a>Shiro授权的关键对象</h3><ul><li><p>权限字符串规则<code>资源标识符:操作:资源实例标识符</code>，例<code>user:create:*</code></p></li><li><p>RBAC Role-Based 基于角色访问控制</p><pre><code class="hljs awk"><span class="hljs-keyword">if</span> (subject.hasRole(<span class="hljs-string">&quot;admin&quot;</span>)) &#123;  <span class="hljs-regexp">//</span> 操作资源&#125;</code></pre></li><li><p>RBAC Resource-Based 基于资源访问控制</p><pre><code class="hljs less"><span class="hljs-selector-tag">if</span> (subject.isPermission(&quot;<span class="hljs-attribute">user</span>:<span class="hljs-attribute">find</span>:*)) &#123;  <span class="hljs-comment">// 操作资源</span>&#125;</code></pre></li></ul><h2 id="Spring-Security"><a href="#Spring-Security" class="headerlink" title="Spring Security"></a>Spring Security</h2><p>认证核心对象</p><ul><li><font color="green">AuthenticationManager</font> 主要实现类<strong>ProviderManager</strong>, 其管理了众多的<strong>AuthenticationProvider</strong>实例，一个Provider有一个完整的认证流程。</li><li><font color="green">Authentication</font> 保存了认证以及认证成功的信息</li><li><font color="green">SecurityContextHolder</font> 用来获取登陆之后的用户信息，SS会将登录用户信息保存在sessio中，但是为了使用方便，SS做了一些改进，其中最主要的就是线程绑定。当用户登录成功后，SS会将用户信息保存到SCH中。SCH中的数据默认使用ThreadLocal，即用户数据和请求线程绑定。当登录请求处理完成后，Spring会将SCH中的用户信息拿出来存到Session中，同时清空SCH。以后每当有请求来到时，SS就会先从Session中取出用户登录信息，保存到SCH中，方便该请求的后续中使用，同时在请求结束时将SCH中的我数据清空。这一策略非常方便用户在代码中的任意地方获取当前登录用户信息。</li></ul><p>授权核心对象</p><ul><li><font color="green">AccessDecisionManager</font></li><li><font color="green">AccessDecisionVoter</font></li><li><font color="green">ConfigAttribute</font> 保存用户角色信息</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Security</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
