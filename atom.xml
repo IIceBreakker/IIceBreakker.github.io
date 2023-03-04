@@ -6,7 +6,7 @@
   <link href="https://github.com/IIceBreakker/IIceBreakker.github.io/atom.xml" rel="self"/>
   
   <link href="https://github.com/IIceBreakker/IIceBreakker.github.io/"/>
-  <updated>2022-07-28T05:29:05.522Z</updated>
+  <updated>2022-07-01T01:14:00.068Z</updated>
   <id>https://github.com/IIceBreakker/IIceBreakker.github.io/</id>
   
   <author>
@@ -15,28 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>说说我的游戏生涯</title>
-    <link href="https://github.com/IIceBreakker/IIceBreakker.github.io/2022/07/28/%E6%88%91%E7%9C%9F%E7%9A%84%E7%8E%A9%E4%BA%86%E5%A5%BD%E5%A4%9A%E6%B8%B8%E6%88%8F/"/>
-    <id>https://github.com/IIceBreakker/IIceBreakker.github.io/2022/07/28/%E6%88%91%E7%9C%9F%E7%9A%84%E7%8E%A9%E4%BA%86%E5%A5%BD%E5%A4%9A%E6%B8%B8%E6%88%8F/</id>
-    <published>2022-07-28T04:26:29.000Z</published>
-    <updated>2022-07-28T05:29:05.522Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>  今天跟同事吃饭的时候突然扯到了小时候玩过的游戏，说着说着突然涌现了好多的回忆，刚好前几天博客挂上去，就想记录一下我这么多年到底是玩（活）了什么呢。</p><h1 id="最初的启蒙"><a href="#最初的启蒙" class="headerlink" title="最初的启蒙"></a>最初的启蒙</h1><p>  这个已经是时代久远的事了，但是我记得当时的游戏基本上都是在一代神机<code>诺基亚</code>碰到到的，想起来那个时候是真的没脸没皮，见到大人就要手机。如果我没记错的话，我玩到的第一个游戏应该是三叔那台翻盖<code>摩托罗拉</code>上的一个赛车游戏，当时见到那个光彩绚丽的屏幕画面，我眼睛都麻了，我从没见过如此有吸引力的东西，好像一个小小的屏幕就能装下整个世界。现在想想，那个时候，游戏这么大的吸引力，似乎是那些画面和声音让我的思维第一次脱离了自己的成长环境的约束，大千世界还有无数我想不到，没见识过的东西，这对于一个从小就好奇心爆棚的人来说不亚于一次思想上的原子弹“轰炸”。再之后的记忆就是<code>诺基亚</code>的<code>塞班</code>时代了，那个时候，凡是有手机的大人几乎都是<code>诺基亚</code>，那个时候我下载游戏的标准流程：</p><p>  1.打开浏览器，搜索“XX品牌手机 XX型号 游戏下载”(那个时候好像是各个牌子的手机都有自己的独立游戏下载分区)</p><p>  2.只能看到跟这个品牌型号相符合的游戏下载</p><p>关于这个，我得说个事，虽然我至今从来没见过这部手机，但是我觉得它一定很强，<code>诺基亚N95</code>，我曾一度认为它是<code>诺基亚</code>的最强神机，为什么捏，因为当年你几乎能在任何一个游戏下载列表看到它，也就是说它基本上能运行当时市面上绝大多数的游戏，所以它一定很强，虽然我没见过（doge）。</p><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220728130422.png"></p><p>后来我去百度了下这玩意儿，它真的很猛。</p><p>让我想想，这一段时间确实玩到了好多种类的游戏，也发生过很多我至今提出来都不好意思的事，比如玩三婶的手机，欠了两百多话费….比如幺叔的手机键盘都被我按坏了…..<img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/avajn-09ega.png"></p><h1 id="胆子肥起来了"><a href="#胆子肥起来了" class="headerlink" title="胆子肥起来了"></a>胆子肥起来了</h1><p>  时间来到初中</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;  今天跟同事吃饭的时候突然扯到了小时候玩过的游戏，说着说着突然涌现了好多的回忆，刚好前几天博客挂上去，就想记录一下我这么多年到底是玩（活）</summary>
-      
-    
-    
-    
-    <category term="Game, Me" scheme="https://github.com/IIceBreakker/IIceBreakker.github.io/categories/Game-Me/"/>
-    
-    
-  </entry>
   
   <entry>
     <title>一次有趣的SQL优化</title>
