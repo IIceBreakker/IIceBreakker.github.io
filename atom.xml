@@ -6,7 +6,7 @@
   <link href="https://github.com/IIceBreakker/IIceBreakker.github.io/atom.xml" rel="self"/>
   
   <link href="https://github.com/IIceBreakker/IIceBreakker.github.io/"/>
-  <updated>2022-07-01T01:14:00.068Z</updated>
+  <updated>2022-06-28T13:42:15.788Z</updated>
   <id>https://github.com/IIceBreakker/IIceBreakker.github.io/</id>
   
   <author>
@@ -15,62 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>一次有趣的SQL优化</title>
-    <link href="https://github.com/IIceBreakker/IIceBreakker.github.io/2022/07/01/%E4%B8%80%E6%AC%A1%E6%9C%89%E8%B6%A3%E7%9A%84SQL%E4%BC%98%E5%8C%96/"/>
-    <id>https://github.com/IIceBreakker/IIceBreakker.github.io/2022/07/01/%E4%B8%80%E6%AC%A1%E6%9C%89%E8%B6%A3%E7%9A%84SQL%E4%BC%98%E5%8C%96/</id>
-    <published>2022-07-01T01:05:40.000Z</published>
-    <updated>2022-07-01T01:14:00.068Z</updated>
-    
-    <content type="html"><![CDATA[<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>  本文记录一次生产环境的SQL优化，鉴于我目前的实力，尚不能洞悉其中的详细缘由。</p><p>  业务背景 一个核心业务表，存放着所有的用户上报数据，用户的上报量很大，基本每时每刻都有数据上报。再者，PC审核端，需要查看最新的用户上报数据，然后进行审核。所以单表的并发查询和修改量是很大的。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h5 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h5&gt;&lt;p&gt;  本文记录一次生产环境的SQL优化，鉴于我目前的实力，尚不能洞悉其中的详细缘由。&lt;/p&gt;
-&lt;p&gt;  业务背景 一个核心业务表，存放着所有的</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL8开启主从复制以及MyCat配置读写分离（2）</title>
-    <link href="https://github.com/IIceBreakker/IIceBreakker.github.io/2022/06/28/MySQL%E5%BC%80%E5%90%AF%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%BB%A5%E5%8F%8AMyCat%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%882%EF%BC%89/"/>
-    <id>https://github.com/IIceBreakker/IIceBreakker.github.io/2022/06/28/MySQL%E5%BC%80%E5%90%AF%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%BB%A5%E5%8F%8AMyCat%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%882%EF%BC%89/</id>
-    <published>2022-06-28T07:57:54.000Z</published>
-    <updated>2022-06-28T12:24:36.566Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL8开启主从复制以及MyCat配置读写分离（1）</title>
-    <link href="https://github.com/IIceBreakker/IIceBreakker.github.io/2022/06/28/MySQL%E5%BC%80%E5%90%AF%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%BB%A5%E5%8F%8AMyCat%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%881%EF%BC%89/"/>
-    <id>https://github.com/IIceBreakker/IIceBreakker.github.io/2022/06/28/MySQL%E5%BC%80%E5%90%AF%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%BB%A5%E5%8F%8AMyCat%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%881%EF%BC%89/</id>
-    <published>2022-06-28T07:56:41.000Z</published>
-    <updated>2022-06-28T12:49:08.449Z</updated>
-    
-    <content type="html"><![CDATA[<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>  生产项目中有个数据表A，表A存放着用户上报来的数据，审核人员审核数据最终也是直接修改A中单条数据的状态，而且还有另外一个系统每隔15分钟就要发起一次HTTP请求拉取该表的数据显示，该请求是根据上一次拉取时间到当前时间作为WHERE条件查询，性能也不好。这样表A每时每刻的偏高并发量导致一些报表查询速度和操作很慢，对了，报表查询本身也是个很费时的操作。所以考虑再三，而且为了锻炼自己的水平，决定采用MySQL集群，使用MyCat2（以下简称MyCat）配置读写分离。</p><h5 id="配置MySQL服务器的主从复制"><a href="#配置MySQL服务器的主从复制" class="headerlink" title="配置MySQL服务器的主从复制"></a>配置MySQL服务器的主从复制</h5><p>  为了配合后期的MyCat，我们在两台服务器上新建两个用户来给MyCat客户端使用，登录两台服务器，执行以下命令。</p><pre><code class="hljs MySQL">-- 新建用户CREATE USER &#x27;mycat&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;你的密码&#x27;;-- 授权远程登录权限 %代表允许所有主机登录GRANT ALL PRIVILEGES ON *.* TO &#x27;mycat&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;你的密码&#x27; WITH GRANT OPTION;FLUSH PRIVILEGES;USE MYSQL;SELECT * FROM USER;</code></pre><p>核心配置为这俩文件，我这是在同一台电脑上配置的</p><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220628200726.png"></p><p>首先是主节点的</p><pre><code class="hljs ini"><span class="hljs-comment"># ***** 重要配置 主从节点设置不同的ID *****</span><span class="hljs-attr">server-id</span>=<span class="hljs-number">1</span><span class="hljs-comment"># 开启日志</span><span class="hljs-attr">log-bin</span>=<span class="hljs-string">&quot;TEST-Master-bin&quot;</span><span class="hljs-comment"># 要同步的数据库</span><span class="hljs-attr">binlog-do-db</span>=TESTDB<span class="hljs-comment">#当sync_binlog = N (N&gt;0) ，MySQL 在每写 N次 二进制日志binary log时，会使用fdatasync()函数将它的写二进制日志binary log同步到磁盘中去。sync_binlog 的默认值是0，像操作系统刷其他文件的机制一样，MySQL不会同步到磁盘中去而是依赖操作系统来刷新binary log。</span><span class="hljs-attr">sync_binlog</span>=<span class="hljs-number">1</span><span class="hljs-comment"># 要忽略的数据库</span><span class="hljs-attr">binlog-ignore-db</span>=mysql<span class="hljs-attr">binlog-ignore-db</span>=performance_schema<span class="hljs-attr">binlog-ignore-db</span>=information_schema<span class="hljs-attr">binlog-ignore-db</span> = sys<span class="hljs-comment"># 三个配置STATEMENT, ROW, MIXED，我们这里选用ROW</span><span class="hljs-attr">binlog_format</span>=ROW</code></pre><p>然后是从节点的</p><pre><code class="hljs ini"><span class="hljs-comment"># ***** 重要配置 主从节点设置不同的ID *****</span><span class="hljs-attr">server-id</span>=<span class="hljs-number">2</span><span class="hljs-comment"># 日志开启</span><span class="hljs-attr">log_bin</span>=TEST-Slave-bin<span class="hljs-comment"># 要同步的数据库</span><span class="hljs-attr">replicate_wild_do_table</span>=TESTDB.%<span class="hljs-comment"># 忽略数据库</span><span class="hljs-attr">replicate_wild_ignore_table</span>=mysql.%<span class="hljs-attr">replicate_wild_ignore_table</span>=performance_schema.%<span class="hljs-attr">replicate_wild_ignore_table</span>=information_schema.%<span class="hljs-comment"># 三个配置STATEMENT, ROW, MIXED</span><span class="hljs-attr">binlog_format</span>=ROW</code></pre><p>在主节点执行以下命令</p><pre><code class="hljs crmsh">SHOW <span class="hljs-keyword">MASTER</span> <span class="hljs-title">STATUS</span>;</code></pre><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220628202552.png"></p><p>这里的File列就是我们上面配置的log-bin，BinLog_Do_DB和Bin_Ignore_DB都对应上面的配置，这里核心是File和Position</p><p>接下来启动从库并执行</p><pre><code class="hljs MySQL">change master to master_host=&#x27;主库IP&#x27;, -- 主库ip地址master_port=3306,master_user=&#x27;root&#x27;, -- 可以在主库上新建一个专门用来主从复制的账号并赋予权限master_password=&#x27;密码&#x27;, -- 密码master_log_file=&#x27;DESKTP-H9RHL3K-bin.000005&#x27;, --主库File文件名，就是上面主库查询的File列master_log_pos=34948678; --主库pos值，上面查询的Position列</code></pre><p>最后在从库上执行</p><pre><code class="hljs crmsh"><span class="hljs-literal">START</span> <span class="hljs-literal">SLAVE</span>;SHOW <span class="hljs-literal">SLAVE</span> STATUS;</code></pre><p>下面两个值为Yes，即为已经成功</p><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220628204724.png"></p><p>现在在主库上执行DML语句，在从库上应该都会反映出来。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h5 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h5&gt;&lt;p&gt;  生产项目中有个数据表A，表A存放着用户上报来的数据，审核人员审核数据最终也是直接修改A中单条数据的状态，而且还有另外一个系统每隔15分钟</summary>
-      
-    
-    
-    
-    <category term="MySQL 集群" scheme="https://github.com/IIceBreakker/IIceBreakker.github.io/categories/MySQL-%E9%9B%86%E7%BE%A4/"/>
-    
-    
-  </entry>
   
   <entry>
     <title>华为经典面试题--双线程打印</title>
@@ -121,7 +65,7 @@
     <link href="https://github.com/IIceBreakker/IIceBreakker.github.io/2022/05/26/%E5%85%B3%E4%BA%8EShiro%E5%92%8CSpring-Security/"/>
     <id>https://github.com/IIceBreakker/IIceBreakker.github.io/2022/05/26/%E5%85%B3%E4%BA%8EShiro%E5%92%8CSpring-Security/</id>
     <published>2022-05-26T02:19:37.000Z</published>
-    <updated>2022-11-04T08:32:17.286Z</updated>
+    <updated>2023-03-04T18:02:09.111Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Shiro认证的关键对象"><a href="#Shiro认证的关键对象" class="headerlink" title="Shiro认证的关键对象"></a>Shiro认证的关键对象</h3><ul><li><font color="green">Subject</font> 访问系统的用户</li><li><font color="green">Principal</font> 身份信息，是<strong>Subject</strong>进行身份认证的标识，必须具有唯一性，如用户名，一个<strong>Subject</strong>可以有多个<strong>Principal</strong>，但是必须有一个<strong>Primary Principal</strong></li><li><font color="green">Credential</font> 凭证信息，主要是密码</li></ul><span id="more"></span><h3 id="Shiro授权的关键对象"><a href="#Shiro授权的关键对象" class="headerlink" title="Shiro授权的关键对象"></a>Shiro授权的关键对象</h3><ul><li><p>权限字符串规则<code>资源标识符:操作:资源实例标识符</code>，例<code>user:create:*</code></p></li><li><p>RBAC Role-Based 基于角色访问控制</p><pre><code class="hljs awk"><span class="hljs-keyword">if</span> (subject.hasRole(<span class="hljs-string">&quot;admin&quot;</span>)) &#123;  <span class="hljs-regexp">//</span> 操作资源&#125;</code></pre></li><li><p>RBAC Resource-Based 基于资源访问控制</p><pre><code class="hljs less"><span class="hljs-selector-tag">if</span> (subject.isPermission(&quot;<span class="hljs-attribute">user</span>:<span class="hljs-attribute">find</span>:*)) &#123;  <span class="hljs-comment">// 操作资源</span>&#125;</code></pre></li></ul><h1 id="Spring-Security"><a href="#Spring-Security" class="headerlink" title="Spring Security"></a>Spring Security</h1><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220724223502.png"></p><h3 id="认证核心对象"><a href="#认证核心对象" class="headerlink" title="认证核心对象"></a>认证核心对象</h3><ul><li><font color="green">AuthenticationManager</font> 主要实现类<strong>ProviderManager</strong>, 其管理了众多的<strong>AuthenticationProvider</strong>实例。在一次完整的认证流程中，SS允许存在多个<strong>AuthenticationProvider</strong>，用来实现多种认证方式。</li><li><font color="green">Authentication</font> 保存了认证以及认证成功的信息</li><li><font color="green">SecurityContextHolder</font> 用来获取登陆之后的用户信息，SS会将登录用户信息保存在sessio中，但是为了使用方便，SS做了一些改进，其中最主要的就是线程绑定。当用户登录成功后，SS会将用户信息保存到SCH中。SCH中的数据默认使用ThreadLocal，即用户数据和请求线程绑定。当登录请求处理完成后，Spring会将SCH中的用户信息拿出来存到Session中，同时清空SCH。以后每当有请求来到时，SS就会先从Session中取出用户登录信息，保存到SCH中，方便该请求的后续中使用，同时在请求结束时将SCH中的我数据清空。这一策略非常方便用户在代码中的任意地方获取当前登录用户信息。</li></ul><h3 id="授权核心对象"><a href="#授权核心对象" class="headerlink" title="授权核心对象"></a>授权核心对象</h3><ul><li><p><font color="green">AccessDecisionManager</font> 访问决策管理器，用来决定此次访问是否被允许。</p></li><li><p><font color="green">AccessDecisionVoter</font> 访问决定投票器，投票器会检查用户是否具备应有的角色，进而投出赞成、反对或者弃票权</p><p>这两者都有众多实现的类，在<code>Manager</code>中换个遍历<code>Voter</code>，进而决定是否允许用户访问。</p></li><li><p><font color="green">ConfigAttribute</font> 保存用户角色信息。在SS中，用户请求一个资源需要的角色会被封装成一个<code>ConfigAttribute</code>对象，在<code>ConfigAttribute</code>中只有一个<code>getAttribute</code>方法，该方法返回一个字符串，就是角色的名称。一般来说角色名称都带有一个<code>ROLE_</code>前缀，投票器所做的事情，其实就是比较用户所具的各个角色和请求某个资源所需的<code>ConfigAttribute</code>之间的关系。</p></li></ul><h3 id="过滤器链"><a href="#过滤器链" class="headerlink" title="过滤器链"></a><strong>过滤器链</strong></h3><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/securityfilterchain.png"></p><p>默认的过滤器链并不是直接放在Web项目的原生过滤器链中，而是通过一个FilterChainProxy来统一管理。SS中的过滤器链通过FilterChainProxy嵌入到原生过滤器链中。<code>FilterChainProxy</code>作为一个顶层的管理者，将统一管理<code>SecurityFiter</code>。<code>FilterChainProxy</code>本身是通过Spring框架提供的<code>DelegatingFilterProxy</code>整合到原生的过滤器链中。</p><table><thead><tr><th>名称</th><th>作用</th><th>默认加载</th></tr></thead><tbody><tr><td>WebSyWebAsyncManagerIntegrationFilter</td><td>WebSyncManager与SpringSecurity上下文集成</td><td>YES</td></tr><tr><td>SecurityContextPersistenceFilter</td><td>处理请求之前将安全信息加载到SecurityContextHolder中</td><td>YES</td></tr><tr><td>HeaderWriterFilter</td><td>处理头信息加入响应中</td><td>YES</td></tr><tr><td>CorsFilter</td><td>处理跨域问题</td><td>NO</td></tr><tr><td>CsrfFilter</td><td>处理CSRF攻击</td><td>YES</td></tr><tr><td>LogoutFilter</td><td>处理注销登录</td><td>YES</td></tr><tr><td>UsernamePasswordAuthenticationFilter</td><td>处理表单登录</td><td>YES</td></tr><tr><td>DefaultLoginPageGeneratingFilter</td><td>配置默认登录页面</td><td>YES</td></tr><tr><td>DefaultLogoutPageGeneratingFilter</td><td>配置默认注销页面</td><td>YES</td></tr><tr><td>BasicAuthenticationFilter</td><td>处理HttpBasic登录</td><td>YES</td></tr><tr><td>RequestCacheAwareFilter</td><td>处理请求缓存</td><td>YES</td></tr><tr><td>SecurityContextHolderAwareRequestFilter</td><td>包装原始请求</td><td>YES</td></tr><tr><td>AnonymousAuthenticationFilter</td><td>配置匿名认证</td><td>YES</td></tr><tr><td>SessionManagementFilter</td><td>处理session并发问题</td><td>YES</td></tr><tr><td>ExceptionTranslationFilter</td><td>处理认证&#x2F;授权中的异常</td><td>YES</td></tr><tr><td>FilterSecurityInterceptor</td><td>处理授权相关</td><td>YES</td></tr></tbody></table><p>这些Filter在全部由一个叫<code>springSecurityFilterChain</code>的Bean加载进来。</p><h3 id="SpringBootWebSecurityConfiguration"><a href="#SpringBootWebSecurityConfiguration" class="headerlink" title="SpringBootWebSecurityConfiguration"></a>SpringBootWebSecurityConfiguration</h3><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220725005847.png"></p><p>这就是没配置任何东西请求会被拦截的原因，是在这里配置的。</p><p>这个类生效的条件是上面两个注解，主要是第一个</p><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220725010131.png"></p><p><code>WebSecurityConfigurationAdapter</code>很重要，所有的配置都是在这里实现的，<strong>但是未来将要被废除</strong></p><h3 id="默认登录界面怎么来的"><a href="#默认登录界面怎么来的" class="headerlink" title="默认登录界面怎么来的"></a>默认登录界面怎么来的</h3><ol><li><p>请求&#x2F;hello登陆接口</p></li><li><p>在请求到达时<code>FilterSecurityInterceptor</code>时，发现请求未认证。请求拦截下来，并抛出<code>AcessDeniedException</code></p></li><li><p>异常被<code>ExceptionTranslationFilter</code>拦截，该Filter中会调用<code>LoginUrlAuthenticationEntryPoint#commence</code>方法给客户端返回302，要求客户端进行重定向到&#x2F;login页面</p></li><li><p>客户端发送login请求且被<code>DefaultLoginPageGeneratingFilter</code>拦截到，并在拦截器中返回生成登录页面</p></li></ol><h2 id="默认用户生成"><a href="#默认用户生成" class="headerlink" title="默认用户生成"></a>默认用户生成</h2><p>默认<code>InMemoryUserDetailManager</code>来进行用户认证的</p><p>由<code>UserDetailsServiceAutoConfiguratio</code>配置生成</p><h2 id="自定义拦截规则"><a href="#自定义拦截规则" class="headerlink" title="自定义拦截规则"></a>自定义拦截规则</h2><p><code>WebSecurityConfigurerAdapter</code>写法，已经过时</p><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220728205533.png"></p><p><code>SecurityFilterChain</code>写法，还需要多摸索</p><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/20220728213244.png"></p><h2 id="自定义认证流程"><a href="#自定义认证流程" class="headerlink" title="自定义认证流程"></a>自定义认证流程</h2><p><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html">https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html</a></p><p>核心类<code>SecurityContextHolder</code></p><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/securitycontextholder.png"></p><p>核心认证流程</p><p><img src="https://iice-disk.oss-cn-beijing.aliyuncs.com/iice_images/abstractauthenticationprocessingfilter.png"></p>]]></content>
     
