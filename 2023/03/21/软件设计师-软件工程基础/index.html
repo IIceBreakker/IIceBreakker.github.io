@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+        <link rel="icon" type="image/png" href="/img/blogicon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <!-- 谷歌广告 -->
+        <script data-ad-client="ca-pub-2387054913975173" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+        </script>
+        
+                <meta name="theme-color" content="#2f4154">
+                <meta name="description" content="">
+                <meta name="author" content="IIceBreakker">
+                <meta name="keywords" content="">
+                <title>
+                    软件设计师-软件工程基础 - IIceBreakker
+                </title>
+
+                <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+                    <script  src="/js/utils.js" ></script>
+                        <script  src="/js/color-schema.js" ></script>
+    <meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="IIceBreakker" type="application/atom+xml">
+</head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>IIceBreakker 个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-03-21 23:45" pubdate>
+        2023年3月21日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      64
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-post-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-post-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+    <a href="" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0; z-index: 1031;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">软件设计师-软件工程基础</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h3 id="软件生存周期"><a href="#软件生存周期" class="headerlink" title="软件生存周期"></a>软件生存周期</h3><ol>
+<li><p>可行性分析与项目开发计划<br>参与人员 -&gt; 用户、项目负责人、系统分析师<br>产出 -&gt; 可行性分析文档、项目开发计划</p>
+</li>
+<li><p>需求分析<br>目的 -&gt; 确定系统的逻辑模型<br>产出 -&gt; 软件需求说明书</p>
+</li>
+<li><p>概要设计<br>参与人员 -&gt; 系统分析师、软件设计师<br>产出 -&gt; 概要设计说明书</p>
+</li>
+<li><p>详细设计<br>参与人员 -&gt; 软件设计师、程序员<br>产出 -&gt; 详细设计文档</p>
+</li>
+<li><p>编码 &#x3D;&gt; 测试 &#x3D;&gt; 维护</p>
+</li>
+</ol>
+<h3 id="软件过程"><a href="#软件过程" class="headerlink" title="软件过程"></a>软件过程</h3><ol>
+<li><p>能力成熟度模型(CMM)<br>诊断工具 -&gt; 成熟度调查表等</p>
+</li>
+<li><p>能力成熟度模型继承(CMMI)<br>阶段式模型 -&gt; 类CMM直接分等级 5个成熟度等级<br>连续式模型 -&gt; 每个单独的过程都有6过程域能力等级 0-5</p>
+</li>
+</ol>
+<h3 id="软件过程模型"><a href="#软件过程模型" class="headerlink" title="软件过程模型"></a>软件过程模型</h3><h4 id="瀑布模型-Waterfall-Mode"><a href="#瀑布模型-Waterfall-Mode" class="headerlink" title="瀑布模型 Waterfall Mode"></a>瀑布模型 Waterfall Mode</h4><p>概述 -&gt; 完整的执行整个软件生存周期，如同瀑布流水逐级下落<br>适用 -&gt; 文档驱动，适用于软件需求很明确的项目<br>优点 -&gt; 容易理解，管理成本低<br>缺点 -&gt; 过于强调正规的流程，很多需求难以评估，而且很多需求错误只有到了后期才能被发现，容易导致项目延期<br>补充 -&gt; 变体V模型，左侧向下按着软件需求建模，概要设计，详细设计，编码进行；随着编码完成，右侧向上按照单元测试，集成测试，系统测试，验收测试验证左侧的每个阶段</p>
+<h4 id="1-增量模型-Incremental-Mode"><a href="#1-增量模型-Incremental-Mode" class="headerlink" title="1.增量模型 Incremental Mode"></a>1.增量模型 Incremental Mode</h4><p>概述 -&gt; 将需求拆分成可按时间迭代的小需求，每次迭代按照瀑布模型产出一个可操作的产品<br>优点 -&gt; 具有Waterfall的所有优点。第一个可交付版本所需时间和成本很少；开发增量小系统风险小；增量投资，可以只对一个或两个增量投资。<br>缺点 -&gt; 不对用户的变更要求进行规划的话，初始增量可能造成后来的增量不稳定；一些增量可能要重新开发，重新开发；管理成本、进度和配置负复杂性超过组织能力。</p>
+<h4 id="2-演化模型-Evolutionary-Mode"><a href="#2-演化模型-Evolutionary-Mode" class="headerlink" title="2.演化模型 Evolutionary Mode"></a>2.演化模型 Evolutionary Mode</h4><h5 id="原型模型-Prototype-Mode"><a href="#原型模型-Prototype-Mode" class="headerlink" title="原型模型 Prototype Mode"></a>原型模型 Prototype Mode</h5><p>适用 -&gt;  用户需求不清、需求经常变化的情况；系统规模不大不复杂<br>分类 -&gt; 探索型原型 &#x3D;&gt; 弄清目标要求，确定希望的特性，探讨多种方案的可行性<br>     -&gt; 实验型原型 &#x3D;&gt; 验证方案或算法的合理性，用于大规模开发前考察方案是否合适<br>     -&gt; 演化型原型 &#x3D;&gt; 将原型演化至最终目标系统</p>
+<h5 id="螺旋模型-Spiral-Mode"><a href="#螺旋模型-Spiral-Mode" class="headerlink" title="螺旋模型 Spiral Mode"></a>螺旋模型 Spiral Mode</h5><p>概述 -&gt; 螺旋执行4个步骤，类增量模型；<br>     -&gt; 制定计划。确定软件目标，选定实施方案，明确项目开发限制<br>     -&gt; 风险分析。重点引进流程。<br>     -&gt; 实施工程。软件开发，验证阶段性产品<br>适用 -&gt; 强调风险分析，庞大、复杂、高风险的系统<br>优点 -&gt; 支持用户需求动态变化，为项目管理人员及时调整管理决策提供了遍历，降低了风险。<br>缺点 -&gt; 需要开发人员具有相当丰富的风险评估经验和专门知识，过多的迭代也会延迟提交时间</p>
+<h4 id="3-喷泉模型-Water-Fountain-Mode"><a href="#3-喷泉模型-Water-Fountain-Mode" class="headerlink" title="3.喷泉模型 Water Fountain Mode"></a>3.喷泉模型 Water Fountain Mode</h4><p>概述 -&gt; 用户需求为动力， <strong>对象</strong>作为驱动，适合<strong>面向对象</strong>开发</p>
+<p>优点 -&gt; 克服了瀑布模型不支持软件重弄用和多项开发活动集成的局限性<br>     -&gt; 使开发过程有迭代性，多次开发活动需要重复多次<br>     -&gt; 开发活动不具有明显的边界，允许交叉进行<br>     -&gt; 开发人员可以同步进行，提高效率，节省时间<br>缺点 -&gt; 各个阶段是重叠的，开发过程需要大量开发人员，不利于管理<br>     -&gt; 严格要求文档，使得审核难度加大</p>
+<h4 id="4-基于构件的开发模型-Component-based-Development-Mode"><a href="#4-基于构件的开发模型-Component-based-Development-Mode" class="headerlink" title="4.基于构件的开发模型 Component based Development Mode"></a>4.基于构件的开发模型 Component based Development Mode</h4><p>概述 -&gt; 采用预先打包的额软件构件开发应用系统<br>包括 -&gt; 领域工程 &#x3D;&gt; 构件领域模型、领域基准体系结构和可复用构件库。<br>     -&gt; 应用系统工程 &#x3D;&gt; 使用可复用构件组装应用系统。</p>
+<h4 id="5-形式化方法模型-Formal-Methods-Model"><a href="#5-形式化方法模型-Formal-Methods-Model" class="headerlink" title="5.形式化方法模型 Formal Methods Model"></a>5.形式化方法模型 Formal Methods Model</h4><p>概述 -&gt; 形式化方法建立在严格数学基础上，主要活动是生成计算机软件形式化的数学规格说明</p>
+<h4 id="6-统一过程模型-UP"><a href="#6-统一过程模型-UP" class="headerlink" title="6.统一过程模型 UP"></a>6.统一过程模型 UP</h4><p>概述 -&gt; 用例和风险驱动，架构为中心，迭代并且增量的开发过程，有UML方法和工具支持，将整个软件开发项目分成许多个小的“袖珍项目”</p>
+<p>4个技术阶段及其制品 -&gt; 起始阶段 &#x3D;&gt; 产生构想文档、初始用例模型、初始项目术语表、初始业务用例、初始风险评估、项目计划、业务模型以及一个或多个原型<br>                   -&gt; 精化阶段 &#x3D;&gt; 产生用例模型、补充需求、分析模型、软件体系结果描述、。。。。<br>                   -&gt; 构建阶段 &#x3D;&gt; 产生设计模型、软件构件、集成的软件增量、测试计划、测试用例以及支持文档<br>                   -&gt; 移交阶段 &#x3D;&gt; 提交的软件增量、贝塔测试和综合用户反馈</p>
+<h4 id="7-敏捷开发-Agile-Development"><a href="#7-敏捷开发-Agile-Development" class="headerlink" title="7.敏捷开发 Agile Development"></a>7.敏捷开发 Agile Development</h4><p>目标 -&gt; 尽可能早地、持续地对有价值的软件的交付。使用户能够在开发周期后期增加或改变需求<br>典型方法 -&gt; 极限编程 XP &#x3D;&gt; 4大价值观、5个原则、12个最佳实践<br>         -&gt; 水晶法 Crystal &#x3D;&gt; 每个不同的项目需要一套不同的策略、约定和方法论；认为人对软件质量有重要的影响<br>         -&gt; 并列争求法 Scrum &#x3D;&gt; 30天一次的迭代称为一个“冲刺”；多个自组织和自治的小组<strong>并行地</strong>递增实现产品。协调是通过简短的日常会议进行。<br>         -&gt; 自适应软件开发 ASD &#x3D;&gt; 6个基本原则<br>         -&gt; 敏捷统一过程 AUP &#x3D;&gt; 建模， 实现，测试，部署，配置及项目管理，环境管理</p>
+<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>略</p>
+<h3 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h3><p>分为两种 -&gt; 面向数据流的结构化设计方法（Structured Design）<br>         -&gt; 面向对象的分析方法（OOD）</p>
+<h4 id="概要设计"><a href="#概要设计" class="headerlink" title="概要设计"></a>概要设计</h4><p>1.设计软件系统总体结构 -&gt; 采用某种设计方法，将复杂系统分成模块<br>                    -&gt; 确定每个模块的功能<br>                    -&gt; 确定模块的调用关系<br>                    -&gt; 确定模块之间的接口，即模块之间传递的信息<br>                    -&gt; 评价模块结构的质量<br>2.数据结构及数据库设计 -&gt; 数据结构的设计，采用抽象数据类型<br>                    -&gt; 数据库设计 &#x3D;&gt;  1、概念设计。自底向上从用户角度进行视图设计，采用E-R模型<br>                                  &#x3D;&gt; 2、逻辑设计。E-R模型独立于DNMS，要结合具体的DBMS特征来建立数据库的逻辑结构<br>                                  &#x3D;&gt; 3、物理设计。设计数据模式的物理细节，例如数据项存储要求、存取方法和索引的建立<br>3.编写概要设计文档 -&gt; 文档主要有概要设计说明书、数据库设计说明书、用户手册以及修订测试计划<br>4.评审 -&gt; 对设计部分是否完整地实现了需求中的要求，设计方法的可行性，关键的处理以及内外部接口定义的正确性、有效性、各部分之间的一致性等都一一进行评审。</p>
+<h4 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h4><p>1.对每个模块进行详细的算法设计，用某种图形、表格和语言等工具将每个模块处理过程详细算法出来<br>2.对模块内部的数据结构进行设计<br>3.对数据库进行物理设计，即确定数据库的物理机构<br>4.其他设计 &#x3D;&gt; 代码设计<br>          &#x3D;&gt; 输入&#x2F;输出设计<br>          &#x3D;&gt; 用户界面设计<br>5.编写详细设计说明书<br>6.评审，对处理过程的算法和数据库的物理结构都要评审<br>系统设计的结果是一系列的系统设计文件，这些文件是物理实现一个信息系统（包括硬件设备和编制软件程序）的重要基础。</p>
+<h3 id="系统测试"><a href="#系统测试" class="headerlink" title="系统测试"></a>系统测试</h3><h4 id="传统软件的测试策略-单元测试-gt-集成测试-gt-确认测试-gt-系统测试"><a href="#传统软件的测试策略-单元测试-gt-集成测试-gt-确认测试-gt-系统测试" class="headerlink" title="传统软件的测试策略 单元测试 -&gt; 集成测试 -&gt; 确认测试 -&gt; 系统测试"></a>传统软件的测试策略 单元测试 -&gt; 集成测试 -&gt; 确认测试 -&gt; 系统测试</h4><h5 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h5><p>5个内容 -&gt; 模块接口。保证了测试模块的数据流可以正常流入、流出<br>     -&gt; 局部数据结构。局部数据结构出错常见<br>     -&gt; 重要的执行路径。精心设计测试用例来发现是否有计算、比较或控制流等方面的错误<br>     -&gt; 出错处理。好的设计应该有对出错的处理的路径<br>     -&gt; 边界条件<br>过程 -&gt; 设计两种模块，<strong>驱动模块</strong>相当于主程序，<strong>桩模块</strong>（存根模块）用来模拟被测试的模块调用的。<strong>简而言之，测试用例输入驱动模块，驱动模块调用被测模块，被测模块调用桩模块。</strong></p>
+<h5 id="集成测试-将所有模块组合起来测试"><a href="#集成测试-将所有模块组合起来测试" class="headerlink" title="集成测试 将所有模块组合起来测试"></a>集成测试 将所有模块组合起来测试</h5><p>两种方法 -&gt; 非增量集成 &#x3D;&gt; 分别测试单个模块，再组合起来进行整体测试<br>                     &#x3D;&gt; 优点 充分利用人力，加快工程进度<br>                     &#x3D;&gt; 缺点 容易混乱，错误不容易定位<br>        -&gt; 增量集成 &#x3D;&gt; 小增量方式逐步进行构造和测试。<br>                   &#x3D;&gt; 优点 容易定位错误，易于对接口彻底测试，并且运用系统化的测试方法</p>
+<p>4个增量测试策略 –&gt;</p>
+<p>1.<strong>自顶向下集成测试</strong> -&gt; 构造软件体系结构的增量方法。。从主控模块开始，沿着控制层次逐步向下，以深度优先或广度优先将从属于主控模块的模块集成到结构中<br>2.<strong>自底向上继承测试</strong> -&gt; 不需要桩模块，自己就是桩模块<br>3.<strong>回归测试</strong> -&gt; 应当将回归测试用例设计成只包括设计每个主要程序功能的一个或多个错误类的测试<br>        -&gt; 包含以下3种测试用例 &#x3D;&gt; 能够测试软件所有功能的具有代表性的测试样本<br>                              &#x3D;&gt; 额外测试，侧重于可能会受变更影响的软件功能<br>                              &#x3D;&gt; 侧重于已发生变更的软件构件测试<br>4.<strong>冒烟测试</strong> -&gt; 时间关键项目的决定性机制<br>        -&gt; 先集成一个新的构建，设计一系列测试用例以暴露该构建的错误，每天将该构建与其他构建及真个软件集成起来进行冒烟测试。自底向上或者自顶向下都可以</p>
+<h5 id="确认测试-此时传统软件、面向对象软件以及WebApp之间的差别已经消失，测试集中与用户可见的动作和用户可识别的系统输出"><a href="#确认测试-此时传统软件、面向对象软件以及WebApp之间的差别已经消失，测试集中与用户可见的动作和用户可识别的系统输出" class="headerlink" title="确认测试 此时传统软件、面向对象软件以及WebApp之间的差别已经消失，测试集中与用户可见的动作和用户可识别的系统输出"></a>确认测试 此时传统软件、面向对象软件以及WebApp之间的差别已经消失，测试集中与用户可见的动作和用户可识别的系统输出</h5><p>1.<strong>确认测试准则</strong>  -&gt; 测试计划列出将要执行的测试类</p>
+<p>                -&gt; 测试规程定义了特定的测试用例</p>
+<p>                -&gt; 设计的特定的测试用例用于确保满足所有的功能需求，具有所有的行为特征，所有内容准确无误且正确显示，达到所有性能要求，文档是正确可用的，且满足其他需求</p>
+<p>2.<strong>配置评审</strong> -&gt; 主要是检查软件、文档和数据是否齐全以及分类是否有序。确保文档、资料的正确和完善，一遍维护阶段使用</p>
+<p>3.<strong>α测试和β测试</strong> -&gt; <strong>α测试是由代表性的最终用户在开发者的场所进行</strong>，开发者全程记录，所以α测试是在受控的环境下进行的<br>              -&gt; <strong>β测试在一个或多个最终用户场所执行</strong>。开发者不在场，不受控的环境，其实就是经常说到的公测<br>              -&gt; <strong>β测试变体客户验收测试</strong>。例如一些政府机构，验收测试，非常正视</p>
+<h5 id="系统测试-将已经确认的软件、计算机硬件、外设和网络等其他因素结合，进行各种集成测试和确认测试"><a href="#系统测试-将已经确认的软件、计算机硬件、外设和网络等其他因素结合，进行各种集成测试和确认测试" class="headerlink" title="系统测试 将已经确认的软件、计算机硬件、外设和网络等其他因素结合，进行各种集成测试和确认测试"></a>系统测试 将已经确认的软件、计算机硬件、外设和网络等其他因素结合，进行各种集成测试和确认测试</h5><p>1.恢复测试 -&gt; 通过一些手段强制让系统故障，验证是否能从错误中恢复过来，并在约定的时间开始事务处理，且不对系统造成任何伤害。若恢复是自动的的，就需要重新验证初始化、检查点和数据是否正确。如果恢复需要人工干预，就要对恢复的平均时间进行评估并判断是否在允许的范围内<br>2.安全性测试 -&gt; 测试人员模拟非法入侵者，采用各种方法冲破防线。其准则是攻破系统的代价要大于之后获取的价值。<br>3.压力测试 -&gt; 以非正常的数量，频率或容量等方式执行系统。<br>          -&gt; 变体 敏感性测试，试图在有效输入类中发现会引发系统不稳定或错误处理的数据组合<br>4.性能测试<br>5.部署测试 -&gt; 在软件将要运行的每一种环境中测试软件。另外，部署测试检查客户将要使用的所有安装程序及专业安装软件，并检查用于想最终用户介绍软件的所有文档。</p>
+<h4 id="测试面向对象软件"><a href="#测试面向对象软件" class="headerlink" title="测试面向对象软件"></a>测试面向对象软件</h4><p>单元测试 -&gt; 封装的类是单元测试的重点，类中包括的操作是最小的可测试单元。面向对象的类测试是由封装在该类中的操作盒类的状态行为驱动的。</p>
+<p>集成测试 -&gt; OOS没有明显层次控制结构，两种策略<br>        -&gt; 1.基于线程的测试，对响应系统的一个输入或时间所需的一组类进行集成，每个线程单独地集成和测试，并应用回归测试以确保没有副作用产生<br>        -&gt; 2.基于使用的测试，通过测试很少使用服务类的那些类开始系统的构建</p>
+<h4 id="测试WebApp"><a href="#测试WebApp" class="headerlink" title="测试WebApp"></a>测试WebApp</h4><p>多种质量维度 -&gt; 内容、功能、结构、可用性、导航性、性能、兼容性、安全性<br>测试策略 -&gt; xxx</p>
+<h4 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h4><p>静态测试 -&gt; 包含人工检测和计算机辅助静态分析</p>
+<h5 id="动态测试"><a href="#动态测试" class="headerlink" title="动态测试"></a>动态测试</h5><p>黑盒测试（功能测试） –&gt;<br>1.等价划分法 -&gt; 需要同时考虑有效等价类和无效等价类<br>2.边界值分析法 -&gt; 选取等价类划分法中的边界测试用例<br>3.错误推测 -&gt; 基于经验和直觉推测所有可能存在的各种错误<br>4.因果图法<br>白盒测试（结构测试） –&gt;<br>1.逻辑覆盖 -&gt; 语句覆盖、判定覆盖、判定&#x2F;条件覆盖、条件组合覆盖、路径覆盖（不一定现实，尤其是在循环中）<br>2.循环覆盖 -&gt;<br>3.基本路径测试 -&gt; 语句覆盖，并不需要路径排列组合</p>
+<p><strong>环形复杂度（基本路径测试数量）</strong> -&gt; CC(G) &#x3D; E - N + 2<br>                            -&gt; CC(G) &#x3D; P + 1 P为原子判定节点</p>
+<h3 id="软件质量"><a href="#软件质量" class="headerlink" title="软件质量"></a>软件质量</h3><p>功能性 -&gt; 适合性、准确性、互用性、依从性、安全性<br>可靠性 -&gt; 成熟性、容错性、易恢复性<br>易使用性 -&gt; 易理解性、易学性、易操作性<br>效率 -&gt; 时间特性、资源特性<br>可维护性 -&gt; 易分析性、易改变性、稳定性、易测试性<br>可移植性 -&gt; 适应性、易安装性、一致性、易替换性</p>
+<h3 id="项目管理"><a href="#项目管理" class="headerlink" title="项目管理"></a>项目管理</h3><p>Gantt图和PERT图</p>
+<p>风险管理 -&gt; 识别风险的一种方法是风险检查条目表</p>
+<p>        -&gt; 风险预测的一种技术是建立风险表 1表示灾难性，2表示严重的，3表示轻微的，4表示可忽略的</p>
+<p>        -&gt; 风险控制最好的方法是主动地避免风险</p>
+<h3 id="软件度量"><a href="#软件度量" class="headerlink" title="软件度量"></a>软件度量</h3><p>McCabe度量法 -&gt; 环路数 V(G) &#x3D; E - G + 2p</p>
+<p>             -&gt; <strong>V(G) &#x3D; P + 1</strong></p>
+<h3 id="结构化开发方法-面向数据流的开发方法"><a href="#结构化开发方法-面向数据流的开发方法" class="headerlink" title="结构化开发方法 面向数据流的开发方法"></a>结构化开发方法 面向数据流的开发方法</h3><p>概述 -&gt; 自顶向下、逐层分解，基本原则是功能的分解与抽象。<br>     -&gt; 软件工程最早出现的开发方法。适合处理数据处理领域的问题，不适合解决大规模的，特别复杂的项目，且难以适应需求的变化</p>
+<p><strong>模块独立标准</strong></p>
+<p>耦合性由弱到强 &#x3D;&gt; 无直接耦合 -&gt; 数据耦合（简单数据值，类似值传递） -&gt; 标记耦合（数据结构） -&gt; 控制耦合（控制变量，类似于执行命令） -&gt; 外部耦合（软件之外的环境联合，如IO设备连接模块） -&gt; 公共耦合（公共数据环境相互作用） -&gt; 内容耦合（直接使用另外的模块的数据）</p>
+<p>内聚性由强到弱 &#x3D;&gt; 功能内聚 -&gt; 顺序内聚（密切相关且顺序执行） -&gt; 通信内聚（所有处理元素作用同一个数据结构） -&gt; 过程内聚（完成多个任务，必须按指定的过程进行）-&gt; 时间内聚（需要同时执行的动作组合在一起） -&gt; 逻辑内聚（若若干个逻辑相似的功能，用参数确定执行） -&gt; 偶然内聚（没有任何联系）</p>
+<h3 id="面向对象的设计"><a href="#面向对象的设计" class="headerlink" title="面向对象的设计"></a>面向对象的设计</h3><h4 id="5大原则"><a href="#5大原则" class="headerlink" title="5大原则"></a>5大原则</h4><p>1.单一责任原则<br>2.开闭原则<br>3.里氏代换原则<br>4.依赖倒转原则<br>5.接口与分离原则</p>
+<p>面向对象的软件测试4个层次</p>
+<p>1.算法层。测试类中定义的每个方法，基本相当于传统软测的单元测试<br>2.类层。测试封装在同一个类中的所有方法与属性之间的调用。相当于模块测试<br>3.模板层。测试一组协同工作的类之间的相互作用。相当于集成测试。<br>4.系统层。把各个子系统组装成完整的面向对象软件。</p>
+<h4 id="UML图"><a href="#UML图" class="headerlink" title="UML图"></a>UML图</h4><p>对象图 -&gt; 给出系统的静态设计视图或静态进程视图<br>      -&gt; 主要支持系统的功能需求，即系统应该提供给最终用户的服务<br>      -&gt; 利用对象图可以对静态数据结构建模</p>
+<p>序列图 -&gt; 描述了以时间顺序组织的对象之间的交互活动</p>
+<p>通信图 -&gt; 强调收发消息的对象的结构组织</p>
+<p>交互概览图 -&gt; </p>
+<p>计时图 -&gt; 适合实时和嵌入式系统建模的交互图，关注沿着线性时间轴、生命线内部和生命线之间的条件改变。<br>      -&gt; 描述对象状态随着时间改变的情况，很像示波器</p>
+<p>状态图 -&gt; 由状态、转换、事件和活动组成<br>      -&gt; 关注系统的动态视图，对于接口、类和行为建模尤为重要，强调对象行为的事件顺序</p>
+<p>活动图 -&gt; 活动状态和动作状态、转换和对象</p>
+<h3 id="数据库的范式化"><a href="#数据库的范式化" class="headerlink" title="数据库的范式化"></a>数据库的范式化</h3><h4 id="函数依赖"><a href="#函数依赖" class="headerlink" title="函数依赖"></a>函数依赖</h4><h4 id="数据库范式"><a href="#数据库范式" class="headerlink" title="数据库范式"></a>数据库范式</h4><p>第一范式 -&gt; 确保每列原子性，无重复列<br>第二范式 -&gt; 确保每列都和主键相关，完全依赖，所有非主属性都完全依赖一个候选关键字<br>第三范式 -&gt; 确保每列都和主键列直接相关，而不是间接相关，所有非主属性对任何候选关键字都不存在传递依赖</p>
+<h4 id="并发控制技术"><a href="#并发控制技术" class="headerlink" title="并发控制技术"></a>并发控制技术</h4><h5 id="加锁-排它锁X锁-共享锁S锁"><a href="#加锁-排它锁X锁-共享锁S锁" class="headerlink" title="加锁 排它锁X锁 共享锁S锁"></a>加锁 排它锁X锁 共享锁S锁</h5><h5 id="三级封锁协议"><a href="#三级封锁协议" class="headerlink" title="三级封锁协议"></a>三级封锁协议</h5><p>一级封锁协议 -&gt; 修改数据R之前加X锁，事务结束释放。<br>            -&gt; 一级封锁协议可以解决丢失更新问题</p>
+<p>二级封锁协议 -&gt; 一级基础上，读数据R之前加S锁，读完释放。<br>            -&gt; 解决了脏数据的问题，不能那个保证可重复读</p>
+<p>三级封锁协议 -&gt; 一级基础上，读数据R之前加上S锁，事务结束释放。<br>            -&gt; 解决了丢失修改，脏数据，不可重复读的问题</p>
+<h5 id="两段封锁协议"><a href="#两段封锁协议" class="headerlink" title="两段封锁协议"></a>两段封锁协议</h5><p>指所有事务必须分两个阶段对数据项加锁和解锁。即事务分两个阶段，第一阶段获取锁，事务可以获取任何数据项上的任何锁，但不能释放；第二阶段释放锁，事务可以释放任何数据项上的任何类型的锁，但不能申请。</p>
+<h2 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h2><p>物理层的设备 -&gt; 中继器（Repeater），集线器（Hub）<br>数据链路层 -&gt; 网桥（Bridge），交换机（Switch）<br>网络层设备 -&gt; 路由器（Router）<br>应用层设备 -&gt; 网关（Gateway）</p>
+<h4 id="TCP-x2F-IP协议簇"><a href="#TCP-x2F-IP协议簇" class="headerlink" title="TCP&#x2F;IP协议簇"></a>TCP&#x2F;IP协议簇</h4><h5 id="IP层协议"><a href="#IP层协议" class="headerlink" title="IP层协议"></a>IP层协议</h5><p>ARP和RARP -&gt; ARP将IP地址解析为物理地址，RARAP则刚好相反<br>ICMP协议（Ping工具） -&gt; 专门用于发送差错报文的协议<br>        -&gt; 5种差错报文（源抑制、超时目的不可达、重定向、要求分段）<br>        -&gt; 4种信息报文（回应请求、回应应答、地址屏蔽码请求、地址屏蔽码应答）<br>TCP协议 -&gt; 重发（Retransmission）技术实现可靠性<br>UDP协议 -&gt; 无连接，不可靠</p>
+<h3 id="操作系统基本知识"><a href="#操作系统基本知识" class="headerlink" title="操作系统基本知识"></a>操作系统基本知识</h3><p>概述 -&gt; 处理机管理、文件管理、存储管理、设备管理、作业管理</p>
+<h4 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h4><p>组成 -&gt; PCB，程序，数据</p>
+<p>进程状态模型 -&gt; 三态，五态，具有挂起的4态</p>
+<h4 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h4><p><strong>1.信号量机制</strong> </p>
+<p>信号量S物理意义。S&gt;&#x3D;0代表某资源可用数，S&lt;0，其绝对值表示阻塞队列中等待该资源的进程数</p>
+<h4 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h4><p>高级调度 -&gt; 输入池哪个后备作业调入主系统做好运行准备，称为一个或一组就绪进程。一个作业只需经过一次高级调度<br>中级调度 -&gt; 交换区中的那个就绪进程调入内存。内存中处于阻塞状态的进程调出至交换区。<br>低级调度 -&gt; 决定内存中的那个就绪进程可以占用CPU</p>
+<p><strong>调度算法</strong> </p>
+<p>多级反馈队列 -&gt; 照顾了短进程以提高系统吞吐量、缩短平均周转时间<br>            -&gt; 照顾I&#x2F;O型进程以获得较好的I&#x2F;O设备利用率和缩短响应时间<br>            -&gt; 不必估计进程的执行时间，动态调节优先级</p>
+<p>            -&gt; 前面的队列按照FSFS执行，一旦掉到最后一个队列，按照时间片轮转执行<br>            -&gt; 高优先级队列为空才执行低优先级队列。若执行过程中有新的来了，则抢占执行，先进程回到队列末尾</p>
+<p>            -&gt; IO完成，提高优先级；时间片用完，降低优先级</p>
+<h4 id="存储管理"><a href="#存储管理" class="headerlink" title="存储管理"></a>存储管理</h4><h5 id="地址重定位-gt-逻辑地址变换成主存物理地址，由操作系统的装入程序Loader和地址重定位机构完成"><a href="#地址重定位-gt-逻辑地址变换成主存物理地址，由操作系统的装入程序Loader和地址重定位机构完成" class="headerlink" title="地址重定位 -&gt; 逻辑地址变换成主存物理地址，由操作系统的装入程序Loader和地址重定位机构完成"></a>地址重定位 -&gt; 逻辑地址变换成主存物理地址，由操作系统的装入程序Loader和地址重定位机构完成</h5><p><strong>静态重定位</strong> -&gt; 程序装入主存前已经完成逻辑地址到物理地址的变换<br><strong>动态重定位</strong> -&gt; 程序运行期间完成。依赖硬件地址变换机构，如基地址寄存器(BR)。</p>
+<h5 id="存储管理方案"><a href="#存储管理方案" class="headerlink" title="存储管理方案"></a>存储管理方案</h5><p>分区存储管理</p>
+<h6 id="分页存储管理"><a href="#分页存储管理" class="headerlink" title="分页存储管理"></a>分页存储管理</h6><p>纯分页存储管理</p>
+<h6 id="分段存储管理"><a href="#分段存储管理" class="headerlink" title="分段存储管理"></a>分段存储管理</h6>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/30/200-05-30-%E5%8D%8E%E4%B8%BA%E7%BB%8F%E5%85%B8%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%8C%E7%BA%BF%E7%A8%8B%E6%89%93%E5%8D%B0/">
+                        <span class="hidden-mobile">华为经典面试题--双线程打印</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jdElMNU0cUs0Do7VY86SW5eF-gzGzoHsz",
+          app_key: "W1C4SSU2QtkkD5pD5uSCV2Hi",
+          placeholder: "🌅快来评论一下吧，评论的时候可以写下你可爱的昵称哦ヾﾉ≧∀≦)o",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    waitElementVisible('vcomments', loadValine);
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">粤ICP备2020100125号-1</a>
+    
+  </div>
+
+
+      
+
+          <!-- 在网页底部添加本站已运行的时间 -->
+          <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+          <script>
+            var now = new Date();
+            function createtime() {
+              var grt = new Date("5/20/2022 23:49:00");//在此处修改你的建站时间
+              now.setTime(now.getTime() + 250);
+              days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if (String(hnum).length == 1) { hnum = "0" + hnum; } minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if (String(mnum).length == 1) { mnum = "0" + mnum; }
+              seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if (String(snum).length == 1) { snum = "0" + snum; }
+              document.getElementById("timeDate").innerHTML = "本站已运行 " + dnum + " 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+            }
+            setInterval("createtime()", 250);
+          </script>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "软件设计师-软件工程基础&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
